@@ -1,28 +1,27 @@
-const input = document.querySelector('#fruit');
-const suggestions = document.querySelector('.suggestions ul');
+// List of fruits for the autocomplete
+const fruits = ["Apple", "Banana", "Cherry", "Date", "Elderberry", "Fig", "Grapes", "Honeydew"];
 
-const fruit = ['Apple', 'Apricot', 'Avocado 🥑', 'Banana', 'Bilberry', 'Blackberry', 'Blackcurrant', 'Blueberry', 'Boysenberry', 'Currant', 'Cherry', 'Coconut', 'Cranberry', 'Cucumber', 'Custard apple', 'Damson', 'Date', 'Dragonfruit', 'Durian', 'Elderberry', 'Feijoa', 'Fig', 'Gooseberry', 'Grape', 'Raisin', 'Grapefruit', 'Guava', 'Honeyberry', 'Huckleberry', 'Jabuticaba', 'Jackfruit', 'Jambul', 'Juniper berry', 'Kiwifruit', 'Kumquat', 'Lemon', 'Lime', 'Loquat', 'Longan', 'Lychee', 'Mango', 'Mangosteen', 'Marionberry', 'Melon', 'Cantaloupe', 'Honeydew', 'Watermelon', 'Miracle fruit', 'Mulberry', 'Nectarine', 'Nance', 'Olive', 'Orange', 'Clementine', 'Mandarine', 'Tangerine', 'Papaya', 'Passionfruit', 'Peach', 'Pear', 'Persimmon', 'Plantain', 'Plum', 'Pineapple', 'Pomegranate', 'Pomelo', 'Quince', 'Raspberry', 'Salmonberry', 'Rambutan', 'Redcurrant', 'Salak', 'Satsuma', 'Soursop', 'Star fruit', 'Strawberry', 'Tamarillo', 'Tamarind', 'Yuzu'];
+// Function to filter and show suggestions
+function searchFruit() {
+    let input = document.getElementById('searchInput').value;
+    input = input.toLowerCase();
+    let suggestions = document.getElementById('suggestions');
 
-function search(str) {
-	let results = [];
+    suggestions.innerHTML = '';
+    if (input.length > 0) {
+        let matches = fruits.filter(fruit => {
+            const regex = new RegExp(`^${input}`, 'gi');
+            return fruit.match(regex);
+        });
 
-	// TODO
-
-	return results;
+        matches.forEach(match => {
+            let div = document.createElement('div');
+            div.innerHTML = match;
+            div.addEventListener("click", function() {
+                document.getElementById('searchInput').value = match;
+                suggestions.innerHTML = '';
+            });
+            suggestions.appendChild(div);
+        });
+    }
 }
-
-function searchHandler(e) {
-	// TODO
-}
-
-function showSuggestions(results, inputVal) {
-
-	// TODO
-}
-
-function useSuggestion(e) {
-	// TODO
-}
-
-input.addEventListener('keyup', searchHandler);
-suggestions.addEventListener('click', useSuggestion);
