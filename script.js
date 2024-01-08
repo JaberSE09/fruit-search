@@ -10,7 +10,7 @@ function searchFruit() {
     suggestions.innerHTML = '';
     if (input.length > 0) {
         let matches = fruits.filter(fruit => {
-            const regex = new RegExp(`^${input}`, 'gi');
+            const regex = new RegExp(input, 'gi');
             return fruit.match(regex);
         });
 
